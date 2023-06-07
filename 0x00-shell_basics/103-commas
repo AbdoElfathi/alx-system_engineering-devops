@@ -1,3 +1,4 @@
 #!/bin/bash
-ls -1a | awk 'BEGIN { FS="/"; OFS="/" } { if ($NF == "." || $NF == "..") print $NF; else if (NF > 1) print $NF "/"; else print $NF }' | awk '{print $0","}' | sort -t "/" -k 1.1,1.1 -k 1.2n -k 1.3n -k 1.4n | awk '{printf "%s",$0} END {print ""}'
+ls -1a | awk 'BEGIN { ORS=","; FS="/"; OFS="/" } { if ($NF == "." || $NF == "..") print $NF; else if (NF > 1) print $NF "/"; else print $NF }' | sort -t "/" -k 1.1,1.1 -k 1.2n -k 1.3n -k 1.4n | sed 's/,$/\n/'
+
 
